@@ -1,0 +1,21 @@
+#window
+WIDTH = 400
+HEIGHT = 600
+WINDOW_SIZE = (HEIGHT, WIDTH)
+WINDOW_NAME = "MEA Platformer"
+FPS = 60
+
+#physics
+GRAVITY = 0.3
+PLAYER_VELOCITY = 2
+ENEMY_VELOCITY = 2
+TERMINAL_VELOCITY = 3
+
+
+# define colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+YELLOW = (255, 255, 0)
