@@ -19,11 +19,13 @@ player = Player(pygame.Rect(50, 50, sprites.player.get_width(), sprites.player.g
 enemy = Enemy(pygame.Rect(50, 50, sprites.enemy.get_width(), sprites.enemy.get_height()))
 
 while True: # game loop
+  #display stuff
   display.fill((146,244,255))
   map.draw(display, sprites)
   display.blit(sprites.player, (player.rect.x, player.rect.y))
   display.blit(sprites.enemy, (enemy.rect.x, enemy.rect.y))
 
+  #movement
   for event in pygame.event.get(): # event loop
       if event.type == QUIT: # check for window quit
           pygame.quit() # stop pygame

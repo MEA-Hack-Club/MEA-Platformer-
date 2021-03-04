@@ -6,10 +6,10 @@ from helpers import *
 class Player:
   def __init__(self, rect, air_timer=0,movement=[0, 0], direction=0, y_momentum=0):
     self.rect = rect
+    self.air_timer = air_timer
     self.movement = movement
     self.direction = direction #-1 = left, 1 = right, 0 = none
     self.y_momentum = y_momentum
-    self.air_timer = air_timer
 
   def collides(self, rect):
     return self.rect.colliderect(rect);
