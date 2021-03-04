@@ -1,8 +1,10 @@
 from settings import *
 from helpers import move
+import pygame
 
-class Enemy:
+class Enemy(pygame.sprite.Sprite):
   def __init__(self, rect, air_timer=0,movement=[0, 0], direction=0, y_momentum=0):
+    super().__init__()
     self.movement = movement
     self.direction = direction
     self.y_momentum = y_momentum

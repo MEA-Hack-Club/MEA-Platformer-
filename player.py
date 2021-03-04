@@ -2,9 +2,11 @@ from pygame.image import load
 from pygame.locals import *
 from settings import *
 from helpers import *
+import pygame
 
-class Player:
+class Player(pygame.sprite.Sprite):
   def __init__(self, rect, air_timer=0,movement=[0, 0], direction=0, y_momentum=0):
+    super().__init__()
     self.rect = rect
     self.air_timer = air_timer
     self.movement = movement
