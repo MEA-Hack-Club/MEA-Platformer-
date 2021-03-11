@@ -2,11 +2,11 @@ from settings import *
 from helpers import move
 
 class Enemy:
-  def __init__(self, rect, air_timer=0,movement=[0, 0], direction=0, y_momentum=0):
-    self.movement = movement
-    self.direction = direction
-    self.y_momentum = y_momentum
-    self.air_timer = air_timer
+  def __init__(self, rect):
+    self.movement = [0, 0]
+    self.direction = 0
+    self.y_momentum =0
+    self.air_timer = 0
     self.rect = rect
 
   def moveRoutine(self, pygame, map, player):

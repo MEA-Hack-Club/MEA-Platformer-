@@ -5,11 +5,12 @@ from helpers import *
 import pygame
 
 class Player:
-  def __init__(self, rect, air_timer=0,movement=[0, 0], direction=0, y_momentum=0):
+  def __init__(self, rect):
     self.rect = rect
-    self.air_timer = air_timer
-    self.movement = movement
-    self.direction = direction #-1 = left, 1 = right, 0 = none
+    self.air_timer = 0
+    self.movement = 0
+    self.moving_right = False
+    self.moving_left = False
     self.y_momentum = 0
     self.current_health = 100
     self.max_health = 100
@@ -34,9 +35,9 @@ class Player:
 
   def move(self, map):
     self.movement = [0, 0]
-    if self.direction == 1:
+    if self.moving_right :
         self.movement[0] += PLAYER_VELOCITY
-    elif self.direction == -1:
+    if self.moving_left :
         self.movement[0] -= PLAYER_VELOCITY
 
     self.movement[1] += self.y_momentum
@@ -56,11 +57,14 @@ class Player:
   def getMovementInput(self, event):
     if event.type == KEYDOWN:
         if event.key == K_d:
-            self.direction = 1
+            self.moving_right = True
         elif event.key == K_a:
-            self.direction = -1
+            self.moving_left = True
         elif event.key == K_w:
             if self.air_timer < 6:
                 self.y_momentum = -5
     elif event.type == KEYUP:
-        self.direction = 0
+      if event.key == K_d:
+        self.moving_right = False
+      if event.key == K_a:
+        self.moving_left = False
