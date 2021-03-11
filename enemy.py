@@ -12,7 +12,8 @@ class Enemy:
   def moveRoutine(self, pygame, map, player):
     if(player.collides(self.rect)):
       self.y_momentum=-2;
-
+      player.do_damage(1)
+      
     stage = int(0.001*pygame.time.get_ticks())%2
     if(stage==0):
       self.moveRight();

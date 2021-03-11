@@ -2,6 +2,7 @@ from pygame.image import load
 from pygame.locals import *
 from settings import *
 from helpers import *
+import pygame
 
 class Player:
   def __init__(self, rect, air_timer=0,movement=[0, 0], direction=0, y_momentum=0):
@@ -9,8 +10,25 @@ class Player:
     self.air_timer = air_timer
     self.movement = movement
     self.direction = direction #-1 = left, 1 = right, 0 = none
-    self.y_momentum = y_momentum
+    self.y_momentum = 0
+    self.current_health = 100
+    self.max_health = 100
+    self.health_bar_length = 100
+    
+  def draw_health_bar(self, display):
+    percentage = self.current_health/self.max_health
+    health_bar = pygame.Rect(10, 150, percentage*self.health_bar_length, 20)
+    pygame.draw.rect(display, RED, health_bar)
 
+  def do_damage(self,damage):
+    self.current_health -= damage
+
+  def heal(self, amount):
+    if(self.current_health<=self.max_health):
+      self.current_health+=amount
+    if(self.current_health>self.max_health):
+      self.current_health = self.max_health
+  
   def collides(self, rect):
     return self.rect.colliderect(rect);
 

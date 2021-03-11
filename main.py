@@ -24,6 +24,10 @@ while True: # game loop
   map.draw(display, sprites)
   display.blit(sprites.player, (player.rect.x, player.rect.y))
   display.blit(sprites.enemy, (enemy.rect.x, enemy.rect.y))
+  player.draw_health_bar(display)
+
+  if(int(pygame.time.get_ticks()*0.001)%5==0):
+    player.heal(1)
 
   #movement
   for event in pygame.event.get(): # event loop
@@ -38,4 +42,4 @@ while True: # game loop
   surf = pygame.transform.scale(display, WINDOW_SIZE)
   screen.blit(surf, (0, 0))
   pygame.display.update() # update display
-  clock.tick(FPS) # maintain 60 fps
+  clock.tick(FPS) # maintain 60 f
