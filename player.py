@@ -15,7 +15,15 @@ class Player:
     self.current_health = 100
     self.max_health = 100
     self.health_bar_length = 100
+    self.projectiles = []
     
+  def move_projectiles(self,display):
+    for projectile in self.projectiles:
+      projectile.move()
+      projectile.draw(display)
+      if projectile.x > 400 or projectile.x < 0:
+        self.projectiles.remove(projectile)
+
   def draw_health_bar(self, display):
     percentage = self.current_health/self.max_health
     health_bar = pygame.Rect(10, 150, percentage*self.health_bar_length, 20)
