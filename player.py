@@ -53,6 +53,8 @@ class Player:
 
     self.rect, collisions = move(self.rect, self.movement, map.tiles)
 
+    if(collisions['checkpoint']):
+      self.heal(1)
     if(collisions['goal']):
       map.switchMap('map1')
       

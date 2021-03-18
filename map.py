@@ -24,6 +24,8 @@ class Map:
             display.blit(sprites.grass, (x * TILE_SIZE, y * TILE_SIZE))
         elif tile == '3':
             display.blit(sprites.flag, (x * TILE_SIZE, y * TILE_SIZE))
+        elif tile == '4':
+            display.blit(sprites.checkpoint, (x * TILE_SIZE, y * TILE_SIZE))
         if tile != '0':
             tiles.append({'type': tile, 'rect': pygame.Rect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE)})
     self.tiles = tiles
