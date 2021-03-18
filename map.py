@@ -1,4 +1,5 @@
 from helpers import readFile
+from settings import *
 import pygame
 
 class Map:

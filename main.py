@@ -2,6 +2,7 @@ import pygame, sys # import pygame and sys
 pygame.init() # initiate pygame
 from enemy import Enemy
 from player import Player
+from projectile import Projectile
 from map import Map
 from pygame.locals import * # import pygame modules
 from helpers import *
@@ -24,18 +25,27 @@ while True: # game loop
   map.draw(display, sprites)
   display.blit(sprites.player, (player.rect.x, player.rect.y))
   display.blit(sprites.enemy, (enemy.rect.x, enemy.rect.y))
+  player.draw_health_bar(display)
+
+  if(int(pygame.time.get_ticks()*0.001)%5==0):
+    player.heal(1)
 
   #movement
+  player.move_projectiles(display)
   for event in pygame.event.get(): # event loop
-      if event.type == QUIT: # check for window quit
-          pygame.quit() # stop pygame
-          sys.exit() # stop script
-      else:
-        player.getMovementInput(event)#get WASD input
+    if event.type == KEYDOWN and event.key == K_SPACE: 
+      projectile = Projectile(10, player.rect.x, player.rect.y, 1 if player.moving_right == True else -1, BLACK)
+      player.projectiles.append(projectile)
+
+    if event.type == QUIT: # check for window quit
+        pygame.quit() # stop pygame
+        sys.exit() # stop script
+    else:
+      player.getMovementInput(event)#get WASD input
   player.move(map)
   enemy.moveRoutine(pygame, map, player)
         
   surf = pygame.transform.scale(display, WINDOW_SIZE)
   screen.blit(surf, (0, 0))
   pygame.display.update() # update display
-  clock.tick(FPS) # maintain 60 fps
+  clock.tick(FPS) # maintain 60 f
