@@ -1,15 +1,23 @@
 from settings import *
+from sprites import yeti_running
 from helpers import move
 
 class Enemy:
   def __init__(self, rect):
     self.movement = [0, 0]
     self.direction = 0
-    self.y_momentum =0
+    self.y_momentum = 0
     self.air_timer = 0
     self.rect = rect
+    self.sprite_index = 0
+    self.sprite = None
+    self.flipped = False
 
   def moveRoutine(self, pygame, map, player):
+    ms_passed = pygame.time.get_ticks()
+    if (ms_passed % 150) <= 15:
+      self.sprite_index = (self.sprite_index+1) % len(yeti_running)
+
     if(player.collides(self.rect)):
       self.y_momentum=-2;
       player.do_damage(1)
@@ -18,8 +26,10 @@ class Enemy:
 
     if collisions['right']:
       self.direction = -1
+      self.flipped = True
     if collisions ['left']:
       self.direction = 1
+      self.flipped = False
   
     if self.direction == 1:
       self.moveRight()

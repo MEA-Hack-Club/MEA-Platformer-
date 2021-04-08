@@ -30,7 +30,10 @@ class Player:
     pygame.draw.rect(display, RED, health_bar)
 
   def do_damage(self,damage):
-    self.current_health -= damage
+    if(self.current_health <= 0):
+      self.current_health = 0;
+    else:
+      self.current_health -= damage
 
   def heal(self, amount):
     if(self.current_health<=self.max_health):

@@ -17,14 +17,19 @@ display = pygame.Surface((300, 200))
 import sprites;
 map = Map("map1")
 player = Player(pygame.Rect(50, 50, sprites.player.get_width(), sprites.player.get_height()))
-enemy = Enemy(pygame.Rect(50, 50, sprites.enemy.get_width(), sprites.enemy.get_height()))
+enemy = Enemy(pygame.Rect(50, 50, sprites.yeti_standing.get_width(), sprites.yeti_standing.get_height()))
 
 while True: # game loop
   #display stuff
   display.fill((146,244,255))
   map.draw(display, sprites)
   display.blit(sprites.player, (player.rect.x, player.rect.y))
-  display.blit(sprites.enemy, (enemy.rect.x, enemy.rect.y))
+  
+  if(enemy.flipped):
+    enemy.sprite = pygame.transform.flip(sprites.yeti_running[enemy.sprite_index], True, False)
+  else:
+    enemy.sprite = sprites.yeti_running[enemy.sprite_index]
+  display.blit(enemy.sprite, (enemy.rect.x, enemy.rect.y))
   player.draw_health_bar(display)
 
   #movement
