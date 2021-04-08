@@ -13,13 +13,24 @@ class Enemy:
     if(player.collides(self.rect)):
       self.y_momentum=-2;
       player.do_damage(1)
-      
-    stage = int(0.001*pygame.time.get_ticks())%2
-    if(stage==0):
-      self.moveRight();
+
+    self.rect, collisions = move(self.rect, self.movement, map.tiles)
+
+    if collisions['right']:
+      self.direction = -1
+    if collisions ['left']:
+      self.direction = 1
+  
+    if self.direction == 1:
+      self.moveRight()
     else:
-      self.moveLeft();
-    self.move(map)
+      self.moveLeft()
+    # stage = int(0.001*pygame.time.get_ticks())%2
+    # if(stage==0):
+    #   self.moveRight();
+    # else:
+    #   self.moveLeft();
+    self.move(map, collisions)
 
   def moveRight(self):
     self.direction=1;
@@ -29,7 +40,7 @@ class Enemy:
     self.direction=0;
 
 
-  def move(self, map):
+  def move(self, map, collisions):
     self.movement = [0, 0]
     if self.direction == 1:
         self.movement[0] += PLAYER_VELOCITY
@@ -38,8 +49,6 @@ class Enemy:
 
     self.movement[1] += self.y_momentum
     self.y_momentum = TERMINAL_VELOCITY if self.y_momentum>TERMINAL_VELOCITY else self.y_momentum+GRAVITY
-
-    self.rect, collisions = move(self.rect, self.movement, map.tiles)
 
     if collisions['bottom']:
       self.y_momentum = 0

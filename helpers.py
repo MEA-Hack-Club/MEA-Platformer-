@@ -24,10 +24,13 @@ def collision_test(rect, tiles):
     return hit_list
 
 def move(rect, movement, tiles):
-    collision_types = {'top': False, 'bottom': False, 'right': False, 'left': False, 'goal': False}
+    collision_types = {'checkpoint': False, 'top': False, 'bottom': False, 'right': False, 'left': False, 'goal': False}
     rect.x += movement[0]
     hit_list = collision_test(rect, tiles)
     for tile in hit_list:
+      if tile['type'] == '5':
+        collision_types['checkpoint'] = True
+        continue;
       if tile['type'] == '3':
         collision_types['goal'] = True;
       if movement[0] > 0:#moving right
@@ -39,6 +42,9 @@ def move(rect, movement, tiles):
     rect.y += movement[1]
     hit_list = collision_test(rect, tiles)
     for tile in hit_list:
+      if tile['type'] == '5':
+        collision_types['checkpoint'] = True
+        continue;
       if tile['type'] == '3':
         collision_types['goal'] = True;
       if movement[1] > 0:#going up

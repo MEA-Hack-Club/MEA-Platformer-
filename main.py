@@ -27,9 +27,6 @@ while True: # game loop
   display.blit(sprites.enemy, (enemy.rect.x, enemy.rect.y))
   player.draw_health_bar(display)
 
-  if(int(pygame.time.get_ticks()*0.001)%5==0):
-    player.heal(1)
-
   #movement
   player.move_projectiles(display)
   for event in pygame.event.get(): # event loop

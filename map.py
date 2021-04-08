@@ -13,16 +13,20 @@ class Map:
 
   def draw(self, display, sprites):
     tiles = []
-    TILE_SIZE = sprites.grass.get_width()
+    TILE_SIZE = sprites.ice_road.get_width()
     for y in range(0, len(self.gameMapArr)):
       for x in range (0, len(self.gameMapArr[y])):
         tile = self.gameMapArr[y][x]
         if tile == '1':
             display.blit(sprites.dirt, (x * TILE_SIZE, y * TILE_SIZE))
         elif tile == '2':
-            display.blit(sprites.grass, (x * TILE_SIZE, y * TILE_SIZE))
+            display.blit(sprites.ice_road, (x * TILE_SIZE, y * TILE_SIZE))
         elif tile == '3':
             display.blit(sprites.flag, (x * TILE_SIZE, y * TILE_SIZE))
+        elif tile == '4':
+            display.blit(sprites.grass, (x * TILE_SIZE, y * TILE_SIZE))
+        elif tile == '5':
+            display.blit(sprites.checkpoint, (x * TILE_SIZE, y * TILE_SIZE))
         if tile != '0':
             tiles.append({'type': tile, 'rect': pygame.Rect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE)})
     self.tiles = tiles

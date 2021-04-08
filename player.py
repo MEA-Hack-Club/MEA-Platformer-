@@ -55,6 +55,9 @@ class Player:
 
     if(collisions['goal']):
       map.switchMap('map1')
+
+    if collisions ['checkpoint']:
+      self.heal(1)
       
     if collisions['bottom']:
       self.y_momentum = 0
