@@ -9,6 +9,7 @@ class Player:
     self.rect = rect
     self.air_timer = 0
     self.movement = 0
+
     self.moving_right = False
     self.moving_left = False
     self.y_momentum = 0
